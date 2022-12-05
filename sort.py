@@ -1,5 +1,4 @@
 import sys, os, shutil
-catalog = sys.argv[1]
 
 def transliterate(name):
     """Заміна символів по алфавітному вказівнику"""
@@ -55,4 +54,12 @@ def normalize(catalog):
                 os.remove(catalog + '/' + 'archives' + '/' + transliterate(file))
     # Видаляєм пусті папки
     del_empty_dirs(catalog)
-normalize(catalog)
+
+def not_nul():
+    # Перевірка на ввід параметра шляху до папки(існування значення)
+    if len(sys.argv) > 1:
+        catalog = sys.argv[1]
+        return catalog
+    
+if __name__ == '__main__':
+    normalize(not_nul()) if not_nul() else print('Шлях не введено')
